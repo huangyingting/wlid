@@ -100,7 +100,7 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: Pod
 metadata:
-  name: wlidkv
+  name: wlid-java
   namespace: ${SERVICE_ACCOUNT_NAMESPACE}
   labels:
     azure.workload.identity/use: "true"
@@ -113,7 +113,7 @@ spec:
       env:
       - name: KEYVAULT_URL
         value: ${KEYVAULT_URL}
-      - name: SECRET_NAME
+      - name: KEYVAULT_SECRET_NAME
         value: ${KEYVAULT_SECRET_NAME}
   nodeSelector:
     kubernetes.io/os: linux
