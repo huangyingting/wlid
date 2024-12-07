@@ -7,12 +7,14 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
+dependencies {    
     implementation 'com.microsoft.sqlserver:mssql-jdbc:12.8.1.jre11'
     implementation 'com.azure:azure-identity:1.12.2'
     implementation 'org.slf4j:slf4j-simple:2.0.16'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation 'com.azure:azure-identity:1.12.2'
+    implementation 'com.azure:azure-security-keyvault-secrets:4.9.1'
+    implementation 'com.azure:azure-core:1.54.1'
+    implementation 'com.microsoft.azure:msal4j:1.17.3'
 }
 
 application {
