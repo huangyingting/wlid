@@ -20,8 +20,6 @@ public class SQL {
         ds.setServerName(sqlServerName); 
         ds.setDatabaseName(databaseName);
         ds.setAuthentication("ActiveDirectoryDefault");
-        // ds.setUser("");
-        // ds.setPassword(""); 
 
         try (Connection connection = ds.getConnection()) {
             while (true) {
