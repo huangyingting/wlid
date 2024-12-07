@@ -109,7 +109,8 @@ spec:
   containers:
     - image: ghcr.io/huangyingting/wlid/wlid-java:latest
       name: wlid-java
-      command: ["java", "-cp", "app.jar", "org.icsu.wlid.KV"]
+      command: ["/bin/sh"]
+      args: ["-c", "java -cp app.jar org.icsu.wlid.KV"]
       env:
       - name: KEYVAULT_URL
         value: ${KEYVAULT_URL}
@@ -119,7 +120,7 @@ spec:
     kubernetes.io/os: linux
 EOF
 
-kubectl logs wlidkv -n "${SERVICE_ACCOUNT_NAMESPACE}"
+kubectl logs wlid -n "${SERVICE_ACCOUNT_NAMESPACE}"
 ```
 
 ### Accessing Azure SQL Database with Azure Workload Identity

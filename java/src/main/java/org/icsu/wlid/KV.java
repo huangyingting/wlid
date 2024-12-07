@@ -21,7 +21,7 @@ public class KV {
         while (true) {
             try {
                 KeyVaultSecret secret = secretClient.getSecret(secretName);        
-                System.out.printf("Successfully got secret, secret=%s", secret.getValue());
+                System.out.println("Successfully got secret: " + secret.getValue());
                 Thread.sleep(15000);
             } catch (Exception e) {
                 e.printStackTrace();
