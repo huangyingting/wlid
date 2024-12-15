@@ -6,7 +6,11 @@ on:
     paths:
       - 'deployment/**'
   workflow_dispatch:
-
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'dev'
 jobs:
   terraform:
     defaults:
@@ -18,7 +22,7 @@ jobs:
       contents: read
       id-token: write
       pull-requests: write    
-    environment: dev
+    environment: ${{ github.event.inputs.environment != '' && github.event.inputs.environment || 'dev' }}
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
