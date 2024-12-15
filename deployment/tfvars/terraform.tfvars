@@ -1,2 +1,2 @@
-prefix=wlid
-location=southeastasia
+prefix = "wlid"
+location = "southeastasia"
