@@ -1,0 +1,2 @@
+prefix=wlid
+location=southeastasia
