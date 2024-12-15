@@ -11,6 +11,12 @@ on:
         description: 'Environment to deploy to'
         required: true
         default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
 jobs:
   terraform:
     defaults:
