@@ -67,7 +67,7 @@ module "github_environment" {
   source       = "../modules/github_environment"
   environment = each.key
   github_repository_full_name    = "${var.github_organization_target}/${var.github_repository}"
-  azure_client_id     = module.gh_usi.user_assinged_identity_id
+  azure_client_id     = module.gh_usi.user_assinged_identity_client_id
   azure_subscription_id = data.azurerm_subscription.sub.subscription_id
   azure_tenant_id = data.azurerm_subscription.sub.tenant_id
   tfstate_resource_group_name = module.github_resource_group.name
