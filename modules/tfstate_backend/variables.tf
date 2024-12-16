@@ -23,7 +23,12 @@ variable "account_replication_type" {
   description = "The Replication Type to use for this storage account"
 }
 
-variable "container_name" {
+variable "environments" {
+  type    = list(string)
+  description = "The environments to create"
+}
+
+variable "container_name_prefix" {
   type = string
   description = "The name of the storage container"
 }

@@ -8,15 +8,16 @@ module "github_resource_group" {
   tags     = var.tags
 }
 
-module "tfstate_storage" {
-  source                   = "../modules/tfstate_storage"
+module "tfstate_backend" {
+  source                   = "../modules/tfstate_backend"
   storage_account_name     = var.storage_account_name
   resource_group_name      = module.github_resource_group.name
   location                 = var.location
   tags                     = var.tags
   account_replication_type = var.account_replication_type
   account_tier             = var.account_tier
-  container_name           = var.container_name
+  environments             = var.environments
+  container_name_prefix    = var.container_name_prefix
 }
 
 module "gh_usi" {
@@ -31,7 +32,7 @@ module "tfstate_role_assignment" {
   source       = "../modules/role_assignment"
   principal_id = module.gh_usi.user_assinged_identity_principal_id
   role_name    = "Storage Blob Data Contributor"
-  scope_id     = module.tfstate_storage.id
+  scope_id     = module.tfstate_backend.id
 }
 
 module "sub_owner_role_assignment" {
@@ -63,14 +64,14 @@ module "gh_federated_credential" {
 }
 
 module "github_environment" {
-  for_each = module.gh_federated_credential
-  source       = "../modules/github_environment"
-  environment = each.key
-  github_repository_full_name    = "${var.github_organization_target}/${var.github_repository}"
-  azure_client_id     = module.gh_usi.user_assinged_identity_client_id
-  azure_subscription_id = data.azurerm_subscription.sub.subscription_id
-  azure_tenant_id = data.azurerm_subscription.sub.tenant_id
-  tfstate_resource_group_name = module.github_resource_group.name
-  tfstate_storage_account_name = module.tfstate_storage.storage_account_name
-  tfstate_container_name = module.tfstate_storage.container_name
+  for_each                     = toset(var.environments)
+  source                       = "../modules/github_environment"
+  environment                  = each.key
+  github_repository_full_name  = "${var.github_organization_target}/${var.github_repository}"
+  azure_client_id              = module.gh_usi.user_assinged_identity_client_id
+  azure_subscription_id        = data.azurerm_subscription.sub.subscription_id
+  azure_tenant_id              = data.azurerm_subscription.sub.tenant_id
+  tfstate_resource_group_name  = module.github_resource_group.name
+  tfstate_storage_account_name = module.tfstate_backend.storage_account_name
+  tfstate_container_name       = "${var.container_name_prefix}-${each.key}"
 }

@@ -48,8 +48,8 @@ variable "account_replication_type" {
   default     = "LRS"
 }
 
-variable "container_name" {
-  type        = string
+variable "container_name_prefix" {
+  type = string
   description = "The name of the storage container"
   default     = "tfstate"
 }
