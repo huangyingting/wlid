@@ -26,9 +26,9 @@ variable "github_repository" {
   description = "The name of the GitHub repository to target"
 }
 
-variable "environment" {
-  type    = string
-  default = "dev"
+variable "environments" {
+  type    = list(string)
+  default = ["dev", "staging", "prod"]
 }
 
 variable "storage_account_name" {
