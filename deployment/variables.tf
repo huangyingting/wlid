@@ -1,14 +1,14 @@
 variable "prefix" {
-  type = string
+  type    = string
   default = "wlid"
 }
 
 variable "location" {
-  type = string
+  type    = string
   default = "southeastasia"
 }
 
 variable "environment" {
-  type = string
+  type    = string
   default = "dev"
 }
