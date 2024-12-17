@@ -101,5 +101,4 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: terraform apply -var="prefix=${{ github.event.inputs.prefix != '' && github.event.inputs.prefix || 'wlid' }}" -var="location=${{ github.event.inputs.location != '' && github.event.inputs.location || 'southeastasia' }}" -var="environment=${{ github.event.inputs.environment != '' && github.event.inputs.environment || 'dev' }}" -auto-approve -input=false
