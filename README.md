@@ -232,6 +232,20 @@ spec:
     kubernetes.io/os: linux
 EOF
 ```
+### Terraform deployment
+Terraform deployment is available in [terraform](terraform) folder.
+Steps to deploy:
+```bash
+cd terraform/bootstrap
+terraform init
+terraform apply
+```
+The bootstrap directory contains Terraform configuration files that set up the following resources:
+- A resource group to hold related resources
+- A managed identity that allows GitHub Actions workflows to access resources in Azure
+- An Azure storage account to store the Terraform state file
+
+Further resources will be deployed using the `deploy-infra.yml` workflow.
 
 ### Reference:
 [Accessing Azure SQL DB via Workload Identity and Managed Identity
