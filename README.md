@@ -4,7 +4,6 @@
 ```bash
 # Azure CLI
 az login
-```bash
 # Azure kubernetes service
 RESOURCE_GROUP="AKSSEA"
 LOCATION="southeastasia"
